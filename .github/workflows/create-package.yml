@@ -3,4 +3,4 @@
 name: Deploy Package
 on:
   push:
-    branches: [ master ]
+    branches: [ main ]

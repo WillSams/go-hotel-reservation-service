@@ -22,6 +22,7 @@
 # ...even if they are in subdirectories
 !*/
 
-!.github/*
-!docs/*
-!specs/*
+!docs/**/*
+!.github/**/*
+!handlers/**/*
+!specs/**/*

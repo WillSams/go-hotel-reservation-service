@@ -22,7 +22,13 @@
 # ...even if they are in subdirectories
 !*/
 
+!db/**/*
 !docs/**/*
+!.envrc.example
 !.github/**/*
 !handlers/**/*
 !specs/**/*
+!Dockerfile
+!docker-compose.yml
+!.dockerignore
+**/node_modules

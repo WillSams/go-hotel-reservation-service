@@ -1,0 +1,14 @@
+version: "3.2"
+services:
+  hotel-db:
+    image: postgres:14.2-alpine
+    container_name: hotel-db
+    environment:
+      - POSTGRES_USER=${DB_USER}
+      - POSTGRES_PASSWORD=${DB_PASSWD}
+    ports:
+      - "${DB_PORT}:5432"
+    volumes:
+      - hotel-db-data:/var/lib/postgresql/data
+volumes:
+  hotel-db-data:

@@ -1,6 +1,6 @@
 {
   "scripts": {
-         "refresh": "node_modules/.bin/knex migrate:rollback && node_modules/.bin/knex migrate:latest && node_modules/.bin/knex seed:run",
+         "refresh": "node_modules/.bin/knex migrate:rollback && node_modules/.bin/knex migrate:latest",
          "seed": "knex seed:run"
      },
   "dependencies": {

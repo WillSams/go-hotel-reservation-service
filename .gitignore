@@ -22,6 +22,7 @@
 # ...even if they are in subdirectories
 !*/
 
+!api/**/*
 !db/**/*
 !docs/**/*
 !.envrc.example
@@ -31,4 +32,8 @@
 !Dockerfile
 !docker-compose.yml
 !.dockerignore
+!Makefile
 **/node_modules
+!.nvmrc
+!serverless.yml.example
+!LICENSE.md

@@ -31,6 +31,5 @@ module.exports = {
       ...connection,
       database: 'hotel_test',
     },
-    seeds: { directory: './seeds/test', },
   },
 };

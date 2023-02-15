@@ -1,0 +1,34 @@
+service: hotelreservationsvc
+
+custom:
+  tableName: "hotels_${self:provider.stage}"
+
+provider:
+  name: aws
+  runtime: go1.x
+  stage: development
+  environment:
+    AWS_REGION: localhost
+    ENV: ${self:provider.stage}
+    DB_USER: <SAME-AS-VALUE-FROM-ENVRC-FILE>
+    DB_PASSWD: <SAME-AS-VALUE-FROM-ENVRC-FILE>
+    DB_HOST: <SAME-AS-VALUE-FROM-ENVRC-FILE>
+    DB_PORT: <SAME-AS-VALUE-FROM-ENVRC-FILE>
+    DB_NAME: hotel_${self:provider.stage}
+
+functions:
+  api:
+    handler: main.go
+    events:
+      - http:
+          path: /api
+          method: post
+      - http:
+          path: /api
+          method: get
+          cors: true
+
+plugins:
+  - serverless-offline
+  - serverless-go-plugin
+  

@@ -1,13 +1,17 @@
 .PHONY: build clean run
 
-# Ehhh...got to used to how handy npm scripts are in NodeJS, so I'm using a Makefile here.  
-# This is seemingly a thing for Go-nistas (ewwww...Go-ninjas? Go-nauts? Go-nauts sounds cool)
-# so I'm going with it.
-
-# Nothing to really build/clean here, but I'm leaving this in for now.
-# Let's at least make sure we have the dependencies installed.
+# Verify that the go.mod file is up to date, and then tidy it up.
+# Build the binary for the playground app and place it in the bin directory.
 build:
-	go mod tidy
+	go mod verify && go mod tidy
+	go build -ldflags="-s -w" -o bin/playground ./playground/main.go
 
-run: build
-	serverless offline start --httpPort 8080
+clean:
+	rm -rf ./bin
+
+# Runs the api lambda locally on whatever port is specified in the API_PORT environment variable.
+# Concurrently runs the playground app on port 8080.
+run: clean build
+	./bin/playground &
+	serverless offline start --httpPort ${API_PORT}
+	

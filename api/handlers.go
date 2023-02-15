@@ -60,7 +60,12 @@ func buildAPIGatewayResponse(statusCode int, body interface{}) (events.APIGatewa
 	}
 
 	return events.APIGatewayProxyResponse{
-		StatusCode: statusCode,
-		Body:       string(responseBody),
+		StatusCode:      statusCode,
+		IsBase64Encoded: false,
+		Body:            string(responseBody),
+		Headers: map[string]string{
+			"Content-Type":             "application/json",
+			"X-YOURCOMPANY-Func-Reply": "graphql-api-handler",
+		},
 	}, nil
 }

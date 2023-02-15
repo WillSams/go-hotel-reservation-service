@@ -107,26 +107,15 @@ npm i -g serverless serverless-go-plugin serverless-offline
 cp serverless.yml.example serverless.yml
 ```
 
-Subsequently, we can run the service locally by executing `serverless offline start --httpPort 8080`
-
-This will start the service on port 8080.
+Subsequently, we can run the service locally by executing `make run` in the root of the project.  Build the GraphQL Playground handler and start the service on ports 8081 and 8080, respectively, or whatever ports the *PLAYGROUD_PORT* and *API_PORT* environment variable are set to.
 
 ```cli
-curl 'http://localhost:8080/development/api' \
+curl http://localhost:$API_PORT/development/api \
   -H 'Content-Type: application/json' \
   -d 'query GetAllReservations {\n reservations {\n Id\n RoomId\n }\n}'
 ```
 
-Viola!  Alternatively, you can also acces the GraphQL playground at [http://localhost:8080/playground](http://localhost:8080/playground) by making the following change in `main.go`:
-
-```go
-func main() {
-  // lambda.Start(api.GraphQlApiHandler)
-  api.PlaygroundHandler()   // for local testing, not for lambda
-}
-```
-
-Gross.  Eventually, I'll move the Playground handler to a separate function so that it can be called from the `serverless.yml` file.
+Viola!  Again, you can also acces the non-Lambda function GraphQL playground at [http://localhost:$PLAYGROUND_PORT/playground](http://localhost:$PLAYGROUND_PORT/playground).  
 
 ### Debugging
 

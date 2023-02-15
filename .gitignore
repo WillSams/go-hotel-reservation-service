@@ -27,8 +27,7 @@
 !docs/**/*
 !.envrc.example
 !.github/**/*
-!handlers/**/*
-!specs/**/*
+
 !Dockerfile
 !docker-compose.yml
 !.dockerignore

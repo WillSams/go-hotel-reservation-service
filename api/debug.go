@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"net/http"
+	"os"
 
 	"github.com/graphql-go/graphql"
 	"github.com/graphql-go/handler"
@@ -35,8 +36,9 @@ func DebubGraphQlApiHandler() {
 		w.Write(response)
 	})
 
-	fmt.Println("Listening on http://localhost/api:8080")
-	http.ListenAndServe(":8080", nil)
+	apiPort := os.Getenv("API_PORT")
+	fmt.Println("Listening on http://localhost/" + apiPort)
+	http.ListenAndServe(":"+apiPort, nil)
 }
 
 func PlaygroundHandler() {
@@ -50,7 +52,8 @@ func PlaygroundHandler() {
 		Playground: true,
 	})
 
-	fmt.Println("Listening on http://localhost/playground:8080")
+	playgroundPort := os.Getenv("PLAYGROUND_PORT")
+	fmt.Println("Listening on http://localhost:" + playgroundPort)
 	http.Handle("/playground", h)
-	http.ListenAndServe(":8080", nil)
+	http.ListenAndServe(":"+playgroundPort, nil)
 }

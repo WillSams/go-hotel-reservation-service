@@ -1,6 +1,0 @@
-# Description: Deploy Lambda Function to Staging environment When PR is merged to main branch
-
-name: Deploy Package
-on:
-  push:
-    branches: [ main ]

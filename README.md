@@ -1,5 +1,7 @@
 # Go Lang Example - Hotel Reservation Service
 
+This is still a work-in-progress, the tests are broken.
+
 Table of Contents
 
 - [Overview](#overview)

@@ -28,6 +28,13 @@ To run the service, you will need to install the following tools.
 
 ## Getting Started
 
+First things first, we'll need to set up our environment variables.  If you've never used Direnv before, you'll understand it's use soon enough.
+
+```bash
+cp .envrc.example .envrc
+direnv allow
+```
+
 ### Install Node Packages
 
 Execute the following within your terminal:
@@ -95,6 +102,9 @@ To run the Lambda function locally, we'll use the Serverless Framework's [go](ht
 ```bash
 nvm use          # optional; you can just use the version of Node listed in .nvmrc
 npm i -g serverless serverless-go-plugin serverless-offline
+
+# You'll need to modify the serverless.yml file to use the environment variables in your .envrc file
+cp serverless.yml.example serverless.yml
 ```
 
 Subsequently, we can run the service locally by executing `serverless offline start --httpPort 8080`
@@ -104,7 +114,7 @@ This will start the service on port 8080.
 ```cli
 curl 'http://localhost:8080/development/api' \
   -H 'Content-Type: application/json' \
-  --d 'query GetAllReservations {\n reservations {\n Id\n RoomId\n }\n}'
+  -d 'query GetAllReservations {\n reservations {\n Id\n RoomId\n }\n}'
 ```
 
 Viola!  Alternatively, you can also acces the GraphQL playground at [http://localhost:8080/playground](http://localhost:8080/playground) by making the following change in `main.go`:

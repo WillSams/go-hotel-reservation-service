@@ -7,8 +7,8 @@ Table of Contents
 - [Getting Started](#getting-started)
 - [Running the service](#running-the-service)
   - [Debugging](#debugging)
-- [Running the tests](#running-the-tests)
-- [The Case for Why We Should Switch to Go For Our Backends](#the-case-for-go-lang)
+- [Running the tests](#running-the-tests)s
+- [The Case for Why We Should Switch to Go For Our Backends](./docs/case_for_go.md)
 
 ## Overview
 

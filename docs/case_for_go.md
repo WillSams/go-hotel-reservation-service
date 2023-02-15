@@ -14,7 +14,7 @@ Table of Contents
 - [Conclusion](#conclusion)
 - [Addendum](#addendum)
   - [Paradigm Discussion - Functional versus Object-Oriented Programming](#paradigm-discussion---functional-versus-object-oriented-programming)
-  - [Other languages not considered - Rust and Elixir](#other-languages-not-considered---rust-and-elixir)
+  - [Other languages not considered - Rust and Elixir](#other-languages-not-considered---ruby-and-elixir)
 
 ## Pros/Cons of TypeScript, Rust, and Go
 
@@ -380,7 +380,7 @@ In distributed, serverless applications, where the system may be composed of mul
 
 Also, C#, Java, and Python are not specifically designed for building serverless applications, although they can still be used for this purpose. Serverless applications typically require a different architectural approach, with a focus on event-driven and stateless computing. Languages like TypeScript, Rust, and Go are well-suited for building serverless applications because they provide support for concurrency, fault tolerance, and memory safety, which are important considerations for serverless computing. Additionally, these languages provide efficient runtime performance, which is critical for serverless applications that are often charged based on resource consumption.
 
-### Other languages not considered - Rust and Elixir
+### Other languages not considered - Ruby and Elixir
 
 While Ruby and Elixir are both powerful languages that are well-suited for building highly concurrent and distributed systems, they do have some potential drawbacks.
 

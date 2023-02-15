@@ -123,7 +123,7 @@ func main() {
 }
 ```
 
-When it comes to performance, Rust and Go are excellent choices for serverless functions. Rust's focus on speed and safety makes it an excellent choice for low-level system programming, while **Go's simplicity, speed, and optimized concurrency make it an excellent choice for building high-performance serverless applications**. TypeScript, on the other hand, may not be the best choice for high-performance applications, but its ease of use and familiarity with JavaScript make it an excellent choice for smaller applications.
+When it comes to performance, Rust and Go are excellent choices for serverless functions.  Regards to performance in general, there is [an entertaining but informative video on YouTube that discusses a deeper performance testing between TypeScript, Rust, and Go](https://youtu.be/Z0GX2mTUtfo). Rust's focus on speed and safety makes it an excellent choice for low-level system programming, while **Go's simplicity, speed, and optimized concurrency make it an excellent choice for building high-performance serverless applications**. TypeScript, on the other hand, may not be the best choice for high-performance applications, but its ease of use and familiarity with JavaScript make it an excellent choice for smaller applications.
 
 TypeScript is great, but it is definitely at a disadvantage here.  Let's continue to the next topic.
 

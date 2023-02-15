@@ -167,7 +167,7 @@ You can then set breakpoints in VS Code and debug the service with ease.
 This project contains BDD style tests with the help of [Ginkgo v2](https://onsi.github.io/ginkgo/). You will need to have Ginkgo installed, something you should have achieved when you followed the [Getting Started](#getting-started) step.  To run the tests, execute the following:
 
 ```bash
-ginkgo test ./specs  # alternatively, 
+ginkgo test ./specs
 ```
 
 ### Other Resources

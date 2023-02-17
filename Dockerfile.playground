@@ -7,12 +7,14 @@ COPY go.mod ./
 COPY go.sum ./
 RUN go mod download
 
-# build the playground binary
-COPY *.go ./
+# build
+COPY . .
 RUN CGO_ENABLED=0 go build -ldflags="-s -w" -o ./bin/playground ./playground/main.go
 
 ## Deploy
 FROM gcr.io/distroless/base-debian10
+
+ENV PLAYGROUND_PORT=8080
 
 WORKDIR /
 
@@ -23,3 +25,15 @@ EXPOSE 8080
 USER nonroot:nonroot
 
 CMD [ "/bin/playground" ]
+
+
+# copy artifacts to a clean image
+# FROM gcr.io/distroless/base-debian10
+
+# WORKDIR /
+
+# COPY --from=build /opt/app/bin/playground /bin/playground
+
+# EXPOSE 8080
+
+# CMD [ "/bin/playground" ]  

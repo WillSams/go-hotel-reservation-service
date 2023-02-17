@@ -55,7 +55,7 @@ npm i  # Install the packages needed for migrations/seeding, knex and pg
 Execute the following within your terminal:
 
 ```bash
-docker compose up -d
+docker-compose up -d
 docker exec -it -u postgres hotel-db bash
 ```
 
@@ -119,6 +119,13 @@ curl http://localhost:$API_PORT/development/api \
 
 Viola!  Again, you can also acces the non-Lambda function GraphQL playground at [http://localhost:$PLAYGROUND_PORT/playground](http://localhost:$PLAYGROUND_PORT/playground).  
 
+In summary, to run the Lambda function and the GraphQL playground locally, execute the following:
+
+```bash
+docker-compose up -d
+make run
+```
+
 ### Debugging
 
 You can painlessly debug your service using [Delve](https://github.com/go-delve/delve) and it works in VS Code as well.  
@@ -151,7 +158,7 @@ If you are using VS Code, install the [Go](https://marketplace.visualstudio.com/
 }
 ```
 
-You can then start the debugger by pressing `F5` or by clicking on the `Debug` button in the VS Code sidebar.  To make it easier to debug, there is a `api/debug.go` file containing functions you can use in main to debug the service.  For example, you can change the following in your `main.go` file:
+You can then start the debugger by pressing `F5` or by clicking on the `Debug` button in the VS Code sidebar.  To make it easier to debug, there is a `api/debug.go` file containing functions you can use in main to debug the service.  For example, you can change the following in your `lambdafunc/main.go` file:
   
   ```go
   func main() {
@@ -169,6 +176,24 @@ This project contains BDD style tests with the help of [Ginkgo v2](https://onsi.
 
 ```bash
 ginkgo test ./specs
+```
+
+## Deploying the service
+
+There are multiple options to deploy the Lambda functions.  You can use the Serverless Framework, AWS SAM, AWS CLI, push Docker containers to ECR, or use a custom GitHub Action.  Using Docker containers may simplify things but it may lengthen cold start times and add additional costs.  Going the GitHub Action route is a more cost-effective route to build and deploy Lambda functions to AWS.  See the [deployment action workflow](.github/workflows/deployment.yml) for more details.  
+
+## Local Testing with Docker
+
+Dockerfiles in this repository can be used for deployments if you choose to but they are mainly here as a reference.  To run them locally, execute the following:
+
+```bash
+# this will build the Lambda function with the default Dockerfile
+docker build . -t go-hotel-lambda  
+docker run -p $API_PORT:80 go-hotel-lambda
+
+# this will build the GraphQL playground with the Dockerfile.playground file
+docker build . -t go-hotel-playground -f Dockerfile.playground
+docker run -p $PLAYGROUND_PORT:8080 go-hotel-playground
 ```
 
 ### Other Resources

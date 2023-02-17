@@ -1,18 +1,21 @@
-FROM public.ecr.aws/lambda/provided:al2 as build
+FROM golang:1.20-alpine as build
 
-# install compiler
-RUN yum install -y golang
-RUN go env -w GOPROXY=direct
+WORKDIR /opt/app
 
 # cache dependencies
-ADD go.mod go.sum ./
+COPY go.mod ./
+COPY go.sum ./
 RUN go mod download
 
 # build
-ADD . .
-RUN go build -o /main
+COPY . .
+RUN CGO_ENABLED=0 go build -ldflags="-s -w" -o ./bin/main ./main.go
 
 # copy artifacts to a clean image
-FROM public.ecr.aws/lambda/provided:al2
-COPY --from=build /main /main
-ENTRYPOINT [ "/main" ]           
+FROM alpine
+
+WORKDIR /
+
+COPY --from=build /opt/app/bin/main /bin/main
+
+ENTRYPOINT [ "/bin/main" ]  

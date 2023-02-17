@@ -28,7 +28,7 @@
 !.envrc.example
 !.github/**/*
 
-!Dockerfile
+!Dockerfile*
 !docker-compose.yml
 !.dockerignore
 !Makefile

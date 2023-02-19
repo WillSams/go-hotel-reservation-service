@@ -15,7 +15,7 @@ jobs:
       - name: Set up Go environment
         uses: actions/setup-go@v2
         with:
-          go-version: 1.20
+          go-version: '>=1.16'
 
       - name: Build Go binary
         run: go o build -ldflags="-s -w" -o ./bin/main ./lambdafunc/main.go
@@ -29,5 +29,5 @@ jobs:
           aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws_region: us-east-1
-          function_name: my-lambda-function
+          function_name: go-hotel-reservation-function
           zip_file: function.zip

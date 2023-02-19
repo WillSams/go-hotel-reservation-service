@@ -180,21 +180,7 @@ ginkgo test ./specs
 
 ## Deploying the service
 
-There are multiple options to deploy the Lambda functions.  You can use the Serverless Framework, AWS SAM, AWS CLI, push Docker containers to ECR, or use a custom GitHub Action.  Using Docker containers may simplify things but it may lengthen cold start times and add additional costs.  Going the GitHub Action route is a more cost-effective route to build and deploy Lambda functions to AWS.  See the [deployment action workflow](.github/workflows/deployment.yml) for more details.  
-
-## Local Testing with Docker
-
-Dockerfiles in this repository can be used for deployments if you choose to but they are mainly here as a reference.  To run them locally, execute the following:
-
-```bash
-# this will build the Lambda function with the default Dockerfile
-docker build . -t go-hotel-lambda  
-docker run -p $API_PORT:80 go-hotel-lambda
-
-# this will build the GraphQL playground with the Dockerfile.playground file
-docker build . -t go-hotel-playground -f Dockerfile.playground
-docker run -p $PLAYGROUND_PORT:8080 go-hotel-playground
-```
+There are multiple options to deploy the Lambda functions.  You can use the Serverless Framework, AWS SAM, AWS CLI, push Docker containers to ECR, or use a custom GitHub Action.  Using Docker containers may simplify things but it may lengthen cold start times and add additional costs.  Going the GitHub Action route is a more cost-effective route to build and deploy Lambda functions to AWS.  Using a GitHub Action to build and deploy your Lambda functions to AWS can be a more cost-effective approach, as it can leverage the existing infrastructure of your GitHub repository and doesn't require additional resources to be provisioned. This approach can also be more flexible and customizable, as you can tailor the deployment workflow to meet your specific needs.  See the [deployment action workflow](.github/workflows/deployment.yml) for more details of how you would deploy the service.  For the example workflow, you'll need to add the following secrets to your GitHub repository: *AWS_ACCESS_KEY_ID* and *AWS_SECRET_ACCESS_KEY*.  
 
 ### Other Resources
 

@@ -62,8 +62,6 @@ docker exec -it -u postgres hotel-db bash
 Once the container's command prompt loads, execute `psql`.  Subsequenly in the Postgres shell, execute:
 
 ```bash
-CREATE EXTENSION IF NOT EXISTS pg_trgm;
-CREATE EXTENSION IF NOT EXISTS btree_gist;
 CREATE DATABASE hotel_development;
 CREATE DATABASE hotel_test;
 \q   # to quit the psql shell

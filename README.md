@@ -62,6 +62,8 @@ docker exec -it -u postgres hotel-db bash
 Once the container's command prompt loads, execute `psql`.  Subsequenly in the Postgres shell, execute:
 
 ```bash
+CREATE EXTENSION IF NOT EXISTS pg_trgm;
+CREATE EXTENSION IF NOT EXISTS btree_gist;
 CREATE DATABASE hotel_development;
 CREATE DATABASE hotel_test;
 \q   # to quit the psql shell
@@ -143,7 +145,7 @@ If you are using VS Code, install the [Go](https://marketplace.visualstudio.com/
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "Launch",
+            "name": "Code",
             "type": "go",
             "request": "launch",
             "mode": "debug",
@@ -153,7 +155,19 @@ If you are using VS Code, install the [Go](https://marketplace.visualstudio.com/
             "env": {},
             "args": [],
             "showLog": true
-        }
+        },
+        {
+            "name": "Test Current File",
+            "type": "go",
+            "request": "launch",
+            "mode": "test",
+            "port": 2345,
+            "host": "127.0.0.1",
+            "program": "${file}",
+            "env": {},
+            "args": [],
+            "showLog": true
+        }       
     ]
 }
 ```

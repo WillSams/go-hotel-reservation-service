@@ -1,7 +1,8 @@
 package api
 
 import (
-	"github.com/google/uuid"
+	"fmt"
+
 	"github.com/graphql-go/graphql"
 	"github.com/jmoiron/sqlx"
 )
@@ -68,24 +69,51 @@ func GetAllReservations(db *sqlx.DB) func(params graphql.ResolveParams) (interfa
 	}
 }
 
-func CreateReservation(db *sqlx.DB) func(params graphql.ResolveParams) (interface{}, error) {
-	return func(params graphql.ResolveParams) (interface{}, error) {
-		roomID := params.Args["roomId"].(string)
-		checkinDate := params.Args["checkinDate"].(string)
-		checkoutDate := params.Args["checkoutDate"].(string)
-		totalCharge := params.Args["totalCharge"].(float64)
+func isRoomAvailable(db *sqlx.DB, roomID string, checkinDate string, checkoutDate string) (bool, error) {
+	var count int
 
-		var reservation Reservation
-		reservation.ID = uuid.New().String()
-		reservation.RoomID = roomID
-		reservation.CheckinDate = checkinDate
-		reservation.CheckoutDate = checkoutDate
-		reservation.TotalCharge = totalCharge
+	err := db.Get(&count, `
+		SELECT COUNT(*) 
+		FROM reservations 
+		WHERE room_id = $1 
+		AND (
+			(checkin_date >= $2 AND checkin_date < $3) OR 
+			(checkout_date > $2 AND checkout_date <= $3) OR 
+			(checkin_date <= $2 AND checkout_date >= $3)
+		)
+    `, roomID, checkinDate, checkoutDate)
 
-		_, err := db.NamedExec(`
-			INSERT INTO reservations (id, room_id, checkin_date, checkout_date, total_charge)
-			VALUES (:id, :room_id, :checkin_date, :checkout_date, :total_charge)
-		`, reservation)
+	if err != nil {
+		return false, nil
+	}
+
+	return count == 0, nil
+}
+
+func CreateReservation(db *sqlx.DB) func(graphql.ResolveParams) (interface{}, error) {
+	return func(p graphql.ResolveParams) (interface{}, error) {
+		roomID := p.Args["roomId"].(string)
+
+		// If there are any overlapping reservations, return an error
+		available, err := isRoomAvailable(db, roomID, p.Args["checkinDate"].(string), p.Args["checkoutDate"].(string))
+		if !available {
+			return nil, fmt.Errorf("reservation dates overlap with an existing reservation")
+		}
+		checkinDate := p.Args["checkinDate"].(string)
+		checkoutDate := p.Args["checkoutDate"].(string)
+		totalCharge := p.Args["totalCharge"].(float64)
+
+		reservation := Reservation{
+			RoomID:       roomID,
+			CheckinDate:  checkinDate,
+			CheckoutDate: checkoutDate,
+			TotalCharge:  totalCharge,
+		}
+
+		_, err = db.NamedExec(`
+            INSERT INTO reservations (room_id, checkin_date, checkout_date, total_charge)
+            VALUES (:room_id, :checkin_date, :checkout_date, :total_charge)
+        `, reservation)
 		if err != nil {
 			return nil, err
 		}

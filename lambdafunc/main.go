@@ -7,5 +7,5 @@ import (
 
 func main() {
 	lambda.Start(api.GraphQlApiHandler)
-	//api.DebubGraphQlApiHandler()   // for local testing, not for lambda
+	//api.DebubGraphQlApiHandler()   // for local testing
 }

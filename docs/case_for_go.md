@@ -83,6 +83,8 @@ const result = fibonacci(30);
 console.log(result);
 ```
 
+```TypeScript
+
 **Rust** is a systems programming language that focuses on speed and safety. Rust's performance is excellent due to its zero-cost abstractions and high-level control over system resources. Rust's ability to handle low-level system programming, combined with its performance, makes it an excellent choice for serverless functions that require high performance.
 
 Using Rust, we can calculate the 30th Fibonacci number in less than a second.
@@ -123,13 +125,15 @@ func main() {
 }
 ```
 
-When it comes to performance, Rust and Go are excellent choices for serverless functions.  Regards to performance in general, there is [an entertaining but informative video on YouTube that discusses a deeper performance testing between TypeScript, Rust, and Go](https://youtu.be/Z0GX2mTUtfo). Rust's focus on speed and safety makes it an excellent choice for low-level system programming, while **Go's simplicity, speed, and optimized concurrency make it an excellent choice for building high-performance serverless applications**. TypeScript, on the other hand, may not be the best choice for high-performance applications, but its ease of use and familiarity with JavaScript make it an excellent choice for smaller applications.
+When it comes to performance, Rust and Go are excellent choices for serverless functions.  Regards to performance in general, there is [an entertaining but informative video on YouTube that discusses a deeper performance testing between TypeScript, Rust, and Go](https://youtu.be/Z0GX2mTUtfo). Rust's focus on speed and safety makes it an excellent choice for low-level system programming, while **Go's simplicity, speed, and optimized concurrency make it an excellent choice for building high-performance serverless applications**. TypeScript, on the other hand, may not be the best choice for high-performance applications, but its ease of use and familiarity with JavaScript make it an excellent choice for smaller applications (for example, Microsoft's [just-js](https://github.com/microsoft/just)).
 
 TypeScript is great, but it is definitely at a disadvantage here.  Let's continue to the next topic.
 
 ## Scalability
 
-**TypeScript** works well with AWS Lambda and is a popular choice for building serverless applications.  It's easy to find examples of TypeScript serverless functions online.
+Scalability is a critical factor to consider when building serverless applications. With the right language and tools, it's possible to build highly scalable applications that can handle increasing levels of traffic, data, or complexity.
+
+**TypeScript** is a popular choice for building serverless applications on AWS Lambda. With TypeScript, it's easy to create serverless functions that can handle API Gateway requests, process data, and interact with other AWS services.
 
 ```TypeScript
 import { APIGatewayProxyHandler } from 'aws-lambda';
@@ -147,7 +151,7 @@ export const handler: APIGatewayProxyHandler = async (event, context) => {
 };
 ```
 
-**Rust** also works well with AWS Lambda.  Rust's fast execution speed, low memory usage, and strong memory safety features make it well-suited for building high-performance and secure serverless applications. Additionally, Rust has a growing ecosystem of libraries and tools specifically designed for building serverless functions, including the lambda_runtime and lambda_http crates, which make it easy to create and deploy serverless functions in Rust.
+**Rust** is another language that works well with AWS Lambda. Rust's fast execution speed, low memory usage, and strong memory safety features make it well-suited for building high-performance and secure serverless applications. Additionally, Rust has a growing ecosystem of libraries and tools specifically designed for building serverless functions, which makes it easy to create and deploy serverless functions in Rust.
 
 ```rust
 use lambda_http::{handler, lambda, IntoResponse, Request, Response};
@@ -167,7 +171,7 @@ fn my_handler(_: Request, _: lambda_runtime::Context) -> Result<impl IntoRespons
 }
 ```
 
-**Go** is the biggest winner here as it offers some advantages compared to TypeScript and Rust for serverless applications:
+**Go** is perhaps the best language for building scalable serverless applications. Go offers several advantages over other languages that make it well-suited for building serverless functions:
 
 - Fast startup time: Go has a very fast startup time, which is important for serverless applications because the function needs to start up quickly in response to an event.
 - Low memory usage: Go uses less memory compared to TypeScript and Rust, which can be important for reducing the cost of running serverless functions in a cloud environment.
@@ -213,7 +217,11 @@ func main() {
 }
 ```
 
-While TypeScript and Rust are both excellent languages with their own strengths, Go's combination of fast startup time, low memory usage, and support for concurrency makes it a great choice for building serverless applications.
+One example of a scalable serverless application built with Go is a real-time chat application. With Go, it's easy to build a chat application that can handle a high volume of messages from multiple users. By using a microservices architecture, load balancing, and database sharding, it's possible to build a highly scalable chat application that can handle millions of concurrent users.
+
+While Go is a great language for building scalable serverless applications, it's not perfect. There may be situations where other languages or tools are a better fit, depending on the specific needs of the application. For example, some applications may require more sophisticated machine learning capabilities, or may need to be integrated with other systems that are written in different languages. In these cases, it may be appropriate to use other languages or tools to build the application.
+
+In summary, when it comes to building scalable serverless applications, Go is the clear winner. While TypeScript and Rust are both excellent languages with their own strengths, Go's combination of fast startup time, low memory usage, and support for concurrency makes it a great choice for building build highly scalable applications that can handle a high volume of traffic and data.
 
 ## Developer Experience
 
@@ -264,7 +272,7 @@ TypeScript, Rust, and Go all provide a great developer experience, with features
 
 ### Cost of Development
 
-**Sticking with TypeScript** while not utilizing the benefits of switching to Rust or Go can still be a viable choice for some projects. TypeScript is a mature language with a large and growing ecosystem, strong tooling support, and a focus on developer productivity and safety. While Rust and Go offer some unique benefits, such as performance, low-level control, and efficient memory management, they may not be necessary for all projects. If a project doesn't require these features, or if the development team doesn't have the expertise or experience to use these languages effectively, then sticking with TypeScript can be a good choice.  Additionally, staying with TypeScript can be a good choice if the project already has a significant investment in TypeScript code, and the cost of migrating to a new language would be prohibitive. It's often easier and more efficient to continue using the same language and build on the existing codebase, rather than starting from scratch with a new language. TypeScript is an excellent choice for web development.
+**Sticking with TypeScript** while not utilizing the benefits of switching to Rust or Go can still be a viable choice for some projects. TypeScript is a mature language with a large and growing ecosystem, strong tooling support, and a focus on developer productivity and safety. While Rust and Go offer some unique benefits, such as performance, low-level control, and efficient memory management, they may not be necessary for all projects. If a project doesn't require these features, or if the development team doesn't have the expertise or experience to use these languages effectively, then sticking with TypeScript can be a good choice.  Additionally, staying with TypeScript can be a good choice if the project already has a significant investment in TypeScript code, and the cost of migrating to a new language would be prohibitive. It's often easier and more efficient to continue using the same language and build on the existing codebase, rather than starting from scratch with a new language.  TypeScript is an excellent choice for web development.
 
 **Switching to Rust from TypeScript** can offer several benefits, especially for projects that require low-level control, performance, and memory safety. Rust is a systems programming language that provides developers with low-level control over memory allocation and management, without sacrificing safety or security.  However, switching to Rust can also have some challenges, especially for developers who are not used to working with memory-safe languages or who are not familiar with Rust's syntax and features. Rust can have a steeper learning curve than some other languages, and its strong type system and borrow checker can be challenging for developers to work with at first. Additionally, the tooling and ecosystem for Rust may not be as mature or robust as those for more established languages like TypeScript.  The return on investment (ROI) of sticking with TypeScript and losing out on the benefits of Go or Rust will depend on the specific needs of our shop and the goals of the project(s). TypeScript is a mature language with a large and growing ecosystem, strong tooling support, and a focus on developer productivity and safety.  Rust is an excellent choice for building network servers.
 
@@ -379,6 +387,8 @@ Languages such as C#, Java, and Python were not considered for this distributed 
 In distributed, serverless applications, where the system may be composed of multiple processes or functions running on different machines, the potential for concurrency issues is even greater. This is because each process or function may be running independently and concurrently, with the potential for shared data or resources. In this context, functional programming can be particularly useful for reducing the complexity of concurrent and distributed systems, by emphasizing immutability and pure functions that avoid shared state and side effects.
 
 Also, C#, Java, and Python are not specifically designed for building serverless applications, although they can still be used for this purpose. Serverless applications typically require a different architectural approach, with a focus on event-driven and stateless computing. Languages like TypeScript, Rust, and Go are well-suited for building serverless applications because they provide support for concurrency, fault tolerance, and memory safety, which are important considerations for serverless computing. Additionally, these languages provide efficient runtime performance, which is critical for serverless applications that are often charged based on resource consumption.
+
+However, usage of a C# framework like [ASP .NET Core](https://dotnet.microsoft.com/en-us/learn/aspnet/what-is-aspnet-core) or a Java framework like [OfficeFloor](https://officefloor.net/tutorials/index.html) are more than capable in the right hands.  The key is to understand the tradeoffs of each language and framework, and to choose the right tool for the job.
 
 ### Other languages not considered - Ruby and Elixir
 

@@ -1,6 +1,9 @@
 package api
 
 import (
+	"fmt"
+	"time"
+
 	"github.com/graphql-go/graphql"
 	"github.com/jmoiron/sqlx"
 )
@@ -11,6 +14,7 @@ type Room struct {
 	AllowSmoking bool    `db:"allow_smoking"`
 	DailyRate    float64 `db:"daily_rate"`
 	CleaningFee  float64 `db:"cleaning_fee"`
+	TotalCharge  float64 `db:"total_charge"`
 }
 
 var roomType = graphql.NewObject(graphql.ObjectConfig{
@@ -41,6 +45,13 @@ var roomType = graphql.NewObject(graphql.ObjectConfig{
 	},
 })
 
+func daysBetween(startDateStr string, endDateStr string) int {
+	startDate, _ := time.Parse("2006-01-02", startDateStr)
+	endDate, _ := time.Parse("2006-01-02", endDateStr)
+	days := int(endDate.Sub(startDate).Hours() / 24)
+	return days
+}
+
 func GetAvailableRooms(db *sqlx.DB) func(params graphql.ResolveParams) (interface{}, error) {
 	return func(params graphql.ResolveParams) (interface{}, error) {
 		startDate, _ := params.Args["startDate"].(string)
@@ -48,22 +59,25 @@ func GetAvailableRooms(db *sqlx.DB) func(params graphql.ResolveParams) (interfac
 		allowSmoking, _ := params.Args["allowSmoking"].(bool)
 		endDate, _ := params.Args["endDate"].(string)
 
+		numDays := daysBetween(startDate, endDate)
+
 		// Query the database for available rooms
-		query := `select distinct ro.id, ro.num_beds, ro.allow_smoking, ro.daily_rate, ro.cleaning_fee,
-				((ro.daily_rate * $2 + ro.cleaning_fee) as total_charge
+		query := fmt.Sprintf(`select distinct ro.id, ro.num_beds, ro.allow_smoking, ro.daily_rate, ro.cleaning_fee,
+				((ro.daily_rate * %d + ro.cleaning_fee)) as total_charge
 			from rooms as ro
-			where ro.allow_smoking = $3
-				and ro.num_beds >= $2
+			where ro.allow_smoking = %t
+				and ro.num_beds >= %d
 				and ro.id not in (
 				select room_id 
 				from reservations 
-				where '$4' between checkin_date and checkout_date
-					and '$1'  between checkin_date and checkout_date
+				where '%s' between checkin_date and checkout_date
+					
+				and '%s'  between checkin_date and checkout_date
 				)
-			order by 6, 2`
+			order by 6, 2`, numDays, allowSmoking, numBeds, endDate, startDate)
 
 		var rooms []Room
-		err := db.Select(&rooms, query, numBeds, allowSmoking, endDate, startDate)
+		err := db.Select(&rooms, query)
 		if err != nil {
 			return nil, err
 		}

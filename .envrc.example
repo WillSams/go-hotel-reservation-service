@@ -9,4 +9,5 @@ export DB_USER=postgres
 export DB_PASSWD=postgres
 export DB_HOST=localhost
 export DB_PORT=15432
+export DB_NAME=hotel_$ENV
 export DB_URL=postgres://${DB_USER}:${DB_PASSWD}@${DB_HOST}:${DB_PORT}/${DB_DEV}

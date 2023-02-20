@@ -9,7 +9,7 @@ RUN go mod download
 
 # build
 COPY . .
-RUN CGO_ENABLED=0 go build -ldflags="-s -w" -o ./bin/main ./main.go
+RUN CGO_ENABLED=0 go build -ldflags="-s -w" -o ./bin/main ./lambdafunc/main.go
 
 # copy artifacts to a clean image
 FROM alpine

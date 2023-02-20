@@ -1,0 +1,33 @@
+name: Deploy Lambda Function
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Go environment
+        uses: actions/setup-go@v2
+        with:
+          go-version: '>=1.16'
+
+      - name: Build Go binary
+        run: go o build -ldflags="-s -w" -o ./bin/main ./lambdafunc/main.go
+
+      - name: Create deployment package
+        run: zip function.zip /bin/main
+
+      - name: Deploy to Lambda
+        uses: appleboy/lambda-action@v0.2.1
+        with:
+          aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws_region: us-east-1
+          function_name: go-hotel-reservation-function
+          zip_file: function.zip

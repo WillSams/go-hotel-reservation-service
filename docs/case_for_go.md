@@ -83,8 +83,6 @@ const result = fibonacci(30);
 console.log(result);
 ```
 
-```TypeScript
-
 **Rust** is a systems programming language that focuses on speed and safety. Rust's performance is excellent due to its zero-cost abstractions and high-level control over system resources. Rust's ability to handle low-level system programming, combined with its performance, makes it an excellent choice for serverless functions that require high performance.
 
 Using Rust, we can calculate the 30th Fibonacci number in less than a second.

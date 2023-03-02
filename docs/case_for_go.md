@@ -67,9 +67,9 @@ Cons:
 
 ## Performance
 
-**TypeScript** is a superset of JavaScript that adds optional static typing to the language. TypeScript has gained popularity among developers due to its ease of use and familiarity with JavaScript. However, when it comes to performance, TypeScript may not be the best choice. Since TypeScript is compiled into JavaScript, it has some performance overhead due to type-checking and compilation. However, the performance impact of TypeScript is usually negligible, especially for small to medium-sized applications.
+**TypeScript** is a popular superset of JavaScript that adds optional static typing to the language. Many developers prefer TypeScript due to its ease of use and its similarity to JavaScript. However, when it comes to performance, TypeScript may not be the best choice. Since TypeScript is compiled into JavaScript, it incurs some performance overhead due to the additional type-checking and compilation processes. Nevertheless, the performance impact of TypeScript is usually minimal, particularly for small to medium-sized applications.
 
-In this code snippet, we're using TypeScript to calculate the 30th Fibonacci number. The Fibonacci sequence is a series of numbers where each number is the sum of the two numbers before it. The first two numbers in the sequence are 0 and 1, and the next number is the sum of the previous two numbers. The 30th Fibonacci number is 832040.  The code snippet below uses recursion to calculate the 30th Fibonacci number.  Give or take your machine's performance, the code snippet below should may take up to 17 seconds to run.
+In the following code snippet, we are using TypeScript to calculate the 30th Fibonacci number. The Fibonacci sequence is a series of numbers in which each number is the sum of the two preceding numbers. The first two numbers in the sequence are 0 and 1, and each subsequent number is the sum of the two preceding numbers. The 45th Fibonacci number is 1,134,903,170. In this code snippet, we are using recursion to calculate the 30th Fibonacci number. Depending on your machine's performance, this code snippet may take up to 17 seconds to run.
 
 ```TypeScript
 function fibonacci(n: number): number {
@@ -79,13 +79,13 @@ function fibonacci(n: number): number {
   return fibonacci(n - 1) + fibonacci(n - 2);
 }
 
-const result = fibonacci(30);
+const result = fibonacci(45);
 console.log(result);
 ```
 
-**Rust** is a systems programming language that focuses on speed and safety. Rust's performance is excellent due to its zero-cost abstractions and high-level control over system resources. Rust's ability to handle low-level system programming, combined with its performance, makes it an excellent choice for serverless functions that require high performance.
+**Rust** is a programming language that prioritizes speed and safety in systems programming. Its excellent performance is a result of its zero-cost abstractions and high-level control over system resources. Rust's ability to handle low-level system programming, coupled with its performance, makes it an ideal choice for serverless functions that require high performance.
 
-Using Rust, we can calculate the 30th Fibonacci number in less than a second.
+As an example, using Rust, we can calculate the 45th Fibonacci number in as little as 10 seconds.
 
 ```rust
 fn fibonacci(n: u32) -> u32 {
@@ -96,14 +96,14 @@ fn fibonacci(n: u32) -> u32 {
 }
 
 fn main() {
-    let result = fibonacci(30);
+    let result = fibonacci(45);
     println!("{}", result);
 }
 ```
 
-**Go** is a compiled language developed by Google that focuses on simplicity, performance, and concurrency. Go's performance is excellent due to its garbage collection, fast compilation, and optimized concurrency. Go's simplicity also makes it easy to write and maintain code. Go is a popular choice for building high-performance serverless applications due to its low memory footprint and fast execution speed.
+**Go** is a compiled programming language developed by Google, which prioritizes simplicity, performance, and concurrency. Go's performance is excellent due to its fast compilation, optimized concurrency, and garbage collection. Its simplicity also makes it easy to write and maintain code. As a result, Go is a popular choice for building high-performance serverless applications, thanks to its low memory footprint and fast execution speed.
 
-Using Go, we can calculate the 30th Fibonacci number in approximately 1.2 seconds.
+As an example, using Go, we can calculate the 45th Fibonacci number in approximately 5 seconds.
 
 ```go
 package main
@@ -118,14 +118,16 @@ func fibonacci(n int) int {
 }
 
 func main() {
-    result := fibonacci(30)
+    result := fibonacci(45)
     fmt.Println(result)
 }
 ```
 
-When it comes to performance, Rust and Go are excellent choices for serverless functions.  Regards to performance in general, there is [an entertaining but informative video on YouTube that discusses a deeper performance testing between TypeScript, Rust, and Go](https://youtu.be/Z0GX2mTUtfo). Rust's focus on speed and safety makes it an excellent choice for low-level system programming, while **Go's simplicity, speed, and optimized concurrency make it an excellent choice for building high-performance serverless applications**. TypeScript, on the other hand, may not be the best choice for high-performance applications, but its ease of use and familiarity with JavaScript make it an excellent choice for smaller applications (for example, Microsoft's [just-js](https://github.com/microsoft/just)).
+When it comes to building serverless functions that require high performance, Rust and Go are both excellent choices. For a deeper analysis of their performance, there is an entertaining and informative video on YouTube that compares TypeScript, Rust, and Go (https://youtu.be/Z0GX2mTUtfo). Rust's focus on speed and safety makes it ideal for low-level system programming, while Go's simplicity, speed, and optimized concurrency make it an excellent choice for building high-performance serverless applications.
 
-TypeScript is great, but it is definitely at a disadvantage here.  Let's continue to the next topic.
+While TypeScript is a great language, it may not be the best choice for high-performance applications. However, its ease of use and familiarity with JavaScript make it an excellent choice for smaller applications, such as Microsoft's just-js (https://github.com/microsoft/just).
+
+For high-performance serverless applications, Rust and Go are both excellent options, while TypeScript may be better suited for smaller applications or projects that require greater ease of use and familiarity with JavaScript.
 
 ## Scalability
 

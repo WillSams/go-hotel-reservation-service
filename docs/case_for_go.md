@@ -69,7 +69,7 @@ Cons:
 
 **TypeScript** is a popular superset of JavaScript that adds optional static typing to the language. Many developers prefer TypeScript due to its ease of use and its similarity to JavaScript. However, when it comes to performance, TypeScript may not be the best choice. Since TypeScript is compiled into JavaScript, it incurs some performance overhead due to the additional type-checking and compilation processes. Nevertheless, the performance impact of TypeScript is usually minimal, particularly for small to medium-sized applications.
 
-In the following code snippet, we are using TypeScript to calculate the 30th Fibonacci number. The Fibonacci sequence is a series of numbers in which each number is the sum of the two preceding numbers. The first two numbers in the sequence are 0 and 1, and each subsequent number is the sum of the two preceding numbers. The 45th Fibonacci number is 1,134,903,170. In this code snippet, we are using recursion to calculate the 30th Fibonacci number. Depending on your machine's performance, this code snippet may take up to 17 seconds to run.
+In the following code snippet, we are using TypeScript to calculate the 45th Fibonacci number. The Fibonacci sequence is a series of numbers in which each number is the sum of the two preceding numbers. The first two numbers in the sequence are 0 and 1, and each subsequent number is the sum of the two preceding numbers. The 45th Fibonacci number is 1,134,903,170. In this code snippet, we are using recursion to calculate the 45th Fibonacci number. Depending on your machine's performance, this code snippet may take up to 17 seconds to run.
 
 ```TypeScript
 function fibonacci(n: number): number {

@@ -4,7 +4,7 @@ go 1.20
 
 require (
 	github.com/aws/aws-lambda-go v1.37.0
-	github.com/graphql-go/graphql v0.8.0
+	github.com/graphql-go/graphql v0.8.1
 	github.com/jmoiron/sqlx v1.3.5
 )
 

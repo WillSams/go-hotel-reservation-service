@@ -52,29 +52,12 @@ npm i  # Install the packages needed for migrations/seeding, knex and pg
 
 ### Create the database
 
-Execute the following within your terminal:
+Let's create and seed the databases and our Reservations and Rooms tables:
 
 ```bash
-docker-compose up -d
-docker exec -it -u postgres hotel-db bash
-```
-
-Once the container's command prompt loads, execute `psql`.  Subsequenly in the Postgres shell, execute:
-
-```bash
-CREATE DATABASE hotel_development;
-CREATE DATABASE hotel_test;
-\q   # to quit the psql shell
-
-exit # to exit the container's Bash shell
-```
-
-Finally, let's create/seed our Reservations and Rooms tables
-
-```bash
-npm run refresh                   # hotels_development - this will drop tables, re-create them
-NODE_ENV=test npm run refresh     # hotels_test this will drop tables, re-create them
-npm run seed                      # This will only seed the tables in the hotels_development database
+# Create the databases and seed them
+NODE_ENV=development ./create_db.sh && npm run refresh
+NODE_ENV=test ./create_db.sh && npm run refresh
 ```
 
 Now, navigate back to the root of the project via `cd ..` and execute the following to install the Go packages needed for the service:

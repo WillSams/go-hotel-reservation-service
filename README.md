@@ -56,8 +56,8 @@ Let's create and seed the databases and our Reservations and Rooms tables:
 
 ```bash
 # Create the databases and seed them
-NODE_ENV=development ./create_db.sh && npm run refresh
-NODE_ENV=test ./create_db.sh && npm run refresh
+NODE_ENV=development | ./create_db.sh && npm run refresh
+NODE_ENV=test | ./create_db.sh && npm run refresh
 ```
 
 Now, navigate back to the root of the project via `cd ..` and execute the following to install the Go packages needed for the service:
